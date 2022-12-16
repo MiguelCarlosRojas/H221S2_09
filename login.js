@@ -6,7 +6,7 @@ const path = require('path');
 const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
-	password : 'miguelangel',
+	password : '',
 	database : 'login'
 });
 
@@ -20,29 +20,34 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
+///////////////
+app.use(express.static(__dirname + '/'));
+/////////////////////
 
 // http://localhost:3000/
-app.get('/', function(request, response) {
+//app.get('/', function(request, response) {
 	// Render login template
-	response.sendFile(path.join(__dirname + '/login.html'));
-});
+//	response.sendFile(path.join(__dirname + '/login.html'));
+//});
 
+
+  
 // http://localhost:3000/auth
 app.post('/auth', function(request, response) {
 	// Capture the input fields
-	let ingresoUsuario = request.body.username;
-	let ingresoContrasenia = request.body.password;
+	let ingresoUsuario = request.body.ingresoUsuario;
+	let ingresoContrasenia = request.body.ingresoContrasenia;
 	// Ensure the input fields exists and are not empty
-	if (username && password) {
-		// Execute SQL query that'll select the account from the database based on the specified username and password
-		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [ingresoUsuario, ingresoContrasenia], function(error, results, fields) {
+	if (ingresoUsuario && ingresoContrasenia) {
+		// Execute SQL query that'll select the account from the database based on the specified ingresoUsuario and paingresoContraseniassword
+		connection.query('SELECT * FROM accounts WHERE ingresoUsuario = ? AND paingresoContraseniassword = ?', [ingresoUsuario, ingresoContrasenia], function(error, results, fields) {
 			// If there is an issue with the query, output the error
 			if (error) throw error;
 			// If the account exists
 			if (results.length > 0) {
 				// Authenticate the user
 				request.session.loggedin = true;
-				request.session.username = username;
+				request.session.ingresoUsuario = ingresoUsuario;
 				// Redirect to home page
 				response.redirect('/home');
 			} else {
@@ -60,8 +65,8 @@ app.post('/auth', function(request, response) {
 app.get('/home', function(request, response) {
 	// If the user is loggedin
 	if (request.session.loggedin) {
-		// Output username
-		response.send('Te has logueado satisfactoriamente:, ' + request.session.username + '!');
+		// Output ingresoUsuario
+		response.send('Te has logueado satisfactoriamente:, ' + request.session.ingresoUsuario + '!');
 	} else {
 		// Not logged in
 		response.send('¡Inicia sesión para ver esta página!');

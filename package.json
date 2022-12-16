@@ -1,23 +1,27 @@
 {
-  "name": "landing_page",
+  "name": "wao",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "start": "nodemon connect.js"
+    "start": "nodemon login.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.2.1",
-    "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.20"
-  }
+  },
+  "main": "login.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelCarlosRojas/wao.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MiguelCarlosRojas/wao/issues"
+  },
+  "homepage": "https://github.com/MiguelCarlosRojas/wao#readme"
 }
